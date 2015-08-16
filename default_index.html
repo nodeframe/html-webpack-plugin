@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html{% if(o.htmlWebpackPlugin.files.manifest) { %} manifest="{%= o.htmlWebpackPlugin.files.manifest %}"{% } %}>
+<html{% if webpack.htmlWebpackPlugin.files.manifest %} manifest="{{ webpack.htmlWebpackPlugin.files.manifest }}"{% endif %}>
   <head>
     <meta charset="UTF-8">
-    <title>{%=o.htmlWebpackPlugin.options.title || 'Webpack App'%}</title>
-    {% if (o.htmlWebpackPlugin.files.favicon) { %}
-    <link rel="shortcut icon" href="{%=o.htmlWebpackPlugin.files.favicon%}">
-    {% } %}
-    {% for (var css in o.htmlWebpackPlugin.files.css) { %}
-    <link href="{%=o.htmlWebpackPlugin.files.css[css] %}" rel="stylesheet">
-    {% } %}
+    <title>{{htmlWebpackPlugin.options.title }}</title>
+    {% if htmlWebpackPlugin.files.favicon  %}
+    <link rel="shortcut icon" href="{{htmlWebpackPlugin.files.favicon}}">
+    {% endif %}
+    {% for css in htmlWebpackPlugin.files.css %}
+    <link href="{{css}}" rel="stylesheet">
+    {% endfor %}
   </head>
   <body>
-    {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
-    <script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
-    {% } %}
+    {% for index,chunk in htmlWebpackPlugin.files.chunks %}
+    <script src="{{chunk.entry}}"></script>
+    {% endfor %}
   </body>
 </html>
